@@ -10,14 +10,13 @@ services = [
   { name: 'BBC Four',             sid: 'bbc_four' },
   { name: 'BBC Four HD',          sid: 'bbc_four_hd' },
   { name: 'BBC News Channel',     sid: 'bbc_news24' },
-  { name: 'BBC News Channel HD',  sid: 'bbc_news_channel_hd' },  
+  { name: 'BBC News Channel HD',  sid: 'bbc_news_channel_hd' }
 ]
 
-cdns = ['ak', 'llnw']
+cdns = %w(ak llnw)
 
-while true
-
-  puts "Available services:"
+loop do
+  puts 'Available services:'
 
   services.each_with_index do |service, index|
     puts " #{index + 1}) #{service[:name]}"
@@ -30,13 +29,12 @@ while true
   break if input.chomp == 'q'
 
   service_no = input.to_i - 1
-  
-  if service_no > 0 and service_no < services.length
+
+  if service_no > 0 && service_no < services.length
     service = services[service_no]
 
     cdn = cdns.sample
 
     system("livestreamer hds://a.files.bbci.co.uk/media/live/manifesto/audio_video/simulcast/hds/uk/pc/#{cdn}/#{service[:sid]}.f4m best")
   end
-  
 end
