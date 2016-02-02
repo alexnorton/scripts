@@ -30,7 +30,7 @@ loop do
 
   service_no = input.to_i - 1
 
-  if service_no > 0 && service_no < services.length
+  if service_no >= 0 && service_no < services.length
     service = services[service_no]
 
     cdn = cdns.sample
